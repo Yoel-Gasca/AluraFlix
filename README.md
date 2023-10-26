@@ -1,5 +1,5 @@
 # AluraFlix
-Aplicacion de una colección de peliculas
+Aplicación de una colección de peliculas
 
 ![image](https://github.com/Yoel-Gasca/AluraFlix/assets/83617933/292fc9bd-4924-43c3-b509-38461bce4dea)
 
