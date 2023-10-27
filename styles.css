@@ -1,7 +1,7 @@
 body {
     font-family: "Roboto Mono", monospace;
     text-align: center;
-    background-image: url("https://caelum-online-public.s3.amazonaws.com/assets-imersaodev/background-aluraflix.png");
+    background-image: url("https://www.alura.com.br/assets/img/imersoes/dev-2021/dia-04-aluraflix-e-filmes.png");
     background-color: #000000;
     background-size: cover;
     background-position: center top;
@@ -34,55 +34,34 @@ body {
     right: 10px;
 }
 
-body>img {
-    margin: 0 10px;
-}
-
-@keyframes show {
-    from {
-        opacity: 0;
-        scale: 25%;
-    }
-
-    to {
-        opacity: 1;
-        scale: 100%;
-    }
-}
-
-img {
-    view-timeline-name: --image;
-    view-timeline-axis: block;
-    animation-timeline: --imgae;
-    animation-name: show;
-    animation-range: entry 1% cover 30%;
-    animation-fill-mode: both;
+#listaPeliculas img {
+    margin: 10px;
     max-height: 250px;
-    margin: 1vw;
-    margin-bottom: 10px;
 }
 
-#container {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-between;
-    ;
+.form-wrapper {
+    margin: 0 0 15px;
 }
 
-p {
-    position: relative;
-    color: white;
-
+.form-wrapper input {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 15px;
 }
 
-.grow {
-    transition: .5s, color .10s;
-    -webkit-transition: .5s, color .10s;
-    -moz-transition: .5s, color .10s;
+.form-wrapper button {
+    border: 0;
+    color: #ffffff;
+    background: #01b869;
+    font-weight: bold;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.grow:hover {
-    transform: scale3d(1.5, 1.5, 0.3);
-    -webkit-transform: scale3d(1.5, 1.5, 0.3);
-    -moz-transform: scale3d(1.5, 1.5, 0.3);
+.form-wrapper button:hover {
+    opacity: 0.8;
 }

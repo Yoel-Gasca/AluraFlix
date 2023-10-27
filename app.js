@@ -1,50 +1,66 @@
-// Obtén una referencia al elemento "container" en el documento HTML
-const container = document.getElementById("container");
+// Arreglo para almacenar las películas
+const listadoDePeliculas = [];
 
-// URL de la API y opciones de solicitud
-const url = 'https://moviesdatabase.p.rapidapi.com/titles?startYear=2010&list=most_pop_movies&endYear=2023&limit=40';
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '4efbdba58bmsh4496a9180f2c7e0p1c0125jsn3ec35151f687',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
-};
+// Función para agregar una película
+function agregarPelicula() {
+  // Obtén el valor del input con id "pelicula"
+  const urlPeliFavorita = document.getElementById("pelicula").value;
 
-// Función asincrónica para obtener y mostrar películas
-async function fetchAndDisplayMovies() {
-    try {
-        // Realiza una solicitud a la API de películas
-        const response = await fetch(url, options);
-        const data = await response.json();
-        
-        // Obtiene el arreglo de resultados de películas
-        const movies = data.results;
+  if (urlPeliFavorita.endsWith(".jpg")) {
+    // Si la URL termina con ".jpg", pide información adicional
+    const infoPelicula = {
+      imagen: urlPeliFavorita,
+      nombre: prompt("Ingresa el Nombre de la Película"),
+      trailer: prompt("Ingrese el Trailer de la Película")
+    };
+    
+    // Agrega la información de la película al arreglo
+    listadoDePeliculas.push(infoPelicula);
 
-        // Itera a través de las películas y muestra la información
-        movies.forEach(movie => {
-            const title = movie.originalTitleText.text;
-            const image = movie.primaryImage ? movie.primaryImage.url : "imagen no encontrada";
-            
-            // Crea elementos HTML para mostrar la película
-            const img = document.createElement("img");
-            img.src = image;
-            img.classList.add("grow");
-            
-            const titulo = document.createElement("p");
-            titulo.textContent = title;
-            
-            const peli = document.createElement("section");
-            peli.appendChild(img);
-            peli.appendChild(titulo);
-            
-            // Agrega la película al contenedor
-            container.appendChild(peli);
-        });
-    } catch (error) {
-        console.error(error);
-    }
+    // Limpia el input
+    document.getElementById("pelicula").value = "";
+
+    // Muestra las películas actualizadas
+    verPeliculas();
+  } else {
+    // Si la URL no termina con ".jpg", muestra una alerta y limpia el input
+    alert("El enlace debe terminar con '.jpg'");
+    document.getElementById("pelicula").value = "";
+  }
 }
 
-// Llama a la función para obtener y mostrar películas
-fetchAndDisplayMovies();
+// Función para mostrar las películas
+function verPeliculas() {
+  const listaPeliculas = document.getElementById("listaPeliculas");
+
+  // Limpia el contenido anterior de la lista
+  listaPeliculas.innerHTML = '';
+
+  // Itera a través de las películas y crea elementos para mostrarlas
+  listadoDePeliculas.forEach((infoPelicula, index) => {
+    const divPelicula = document.createElement("div");
+    divPelicula.classList.add("infoPelicula");
+
+    const enlaceImagen = document.createElement("a");
+    enlaceImagen.href = infoPelicula.trailer;
+    enlaceImagen.target = "_blank";
+
+    const imagen = document.createElement("img");
+    imagen.src = infoPelicula.imagen;
+    imagen.alt = infoPelicula.nombre;
+
+    const nombre = document.createElement("p");
+    nombre.textContent = infoPelicula.nombre;
+    nombre.style.color = "#ffffff";
+
+    divPelicula.appendChild(enlaceImagen);
+    enlaceImagen.appendChild(imagen);
+    divPelicula.appendChild(nombre);
+
+    // Agrega la película al contenedor de la lista
+    listaPeliculas.appendChild(divPelicula);
+  });
+}
+
+// Inicialmente, muestra las películas (si las hay)
+verPeliculas();
